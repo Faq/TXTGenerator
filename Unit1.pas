@@ -12,9 +12,11 @@ type
     SaveFile: TButton;
     Generate: TButton;
     Memo1: TMemo;
+    Delete: TButton;
     procedure LoadFile(Sender: TObject);
     procedure SaveFileClick(Sender: TObject);
     procedure GenerateClick(Sender: TObject);
+    procedure DeleteClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -42,6 +44,14 @@ begin
 Memo1.Lines.SaveToFile('template.txt');
 end;
 
+procedure TForm1.DeleteClick(Sender: TObject);
+var
+  dirName: String;
+begin
+  dirName := 'gen';
+  TDirectory.Delete(dirName, True);
+end;
+
 procedure TForm1.GenerateClick(Sender: TObject);
 var
   dirName, fName : String;
@@ -50,8 +60,13 @@ begin
   // Create a new directory
   dirName := 'gen';
 
-  if NOT DirectoryExists(dirName) then
-    CreateDir(dirName);
+  //if NOT DirectoryExists(dirName) then
+    //CreateDir(dirName);
+
+  //could be used also like this
+  //dirName := ExpandUNCFileName(dirName);
+  dirName := IncludeTrailingPathDelimiter(GetCurrentDir) + dirName;
+  ForceDirectories(dirName);
 
   fName := Edit1.Text;
   max := StrToInt(fName);

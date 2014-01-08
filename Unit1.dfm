@@ -75,4 +75,13 @@ object Form1: TForm1
     ScrollBars = ssVertical
     TabOrder = 3
   end
+  object Delete: TButton
+    Left = 240
+    Top = 0
+    Width = 81
+    Height = 33
+    Caption = 'Delete'
+    TabOrder = 4
+    OnClick = DeleteClick
+  end
 end
